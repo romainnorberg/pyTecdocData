@@ -7,3 +7,5 @@ print(cd)
 
 cd.loadTablesFromDB()
 print(cd)
+
+cd.loadTableRows()
