@@ -54,21 +54,37 @@ class Cd:
             print('found an exception when connecting to ODBC database')
 
     def loadTablesFromDB(self):
-        self.__cursor.execute('select tname from systable where owner > 1')
+        self.__cursor.execute('select tname, segno from systable where owner > 1')
         for row in self.__cursor:
-            newtable = Table(row[0])
+            newtable = Table(row[0],tid="{0}".format(row[1]) )
             self.__tables.append(newtable)
             del(newtable)
+
+    def loadTableRows(self):
+        print("Loading row information. This may take some time.")
+        for t in self.__tables:
+            print('Counting rows in table {0}'.format(t.tname))
+            self.__cursor.execute('select count(*) from {0}'.format(t.tname))
+            for row in self.__cursor:
+                t.rows = row[0]
+        
+
+    def getTable(self, t):
+        if t<= len(self.__tables):
+            return self.__tables[t]
+        else:
+            return None
             
 
 
 class Table:
-    def __init__(self, tname, rows=0):
+    def __init__(self, tname, rows=0, tid=''):
         self.tname = tname
         self.rows = rows
+        self.t_id = tid
 
     def __str__(self):
-        #return 'Numele meu este {0}. Am {1} ani.'.format(self.name, self.age)
+        return "Table name: {0}.  Rows in table: {1}. Table ID: {2}".format(self.tname,self.rows,self.t_id)
         pass
 
     def __del__(self):
