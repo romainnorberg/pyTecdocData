@@ -3,7 +3,7 @@
 import pypyodbc
 
 
-__datadir = r'D:\tecdoc_data\data'
+__datadir = ''
 
 def setDataDir(dir):
     __datadir = dir
