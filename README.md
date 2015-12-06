@@ -2,7 +2,11 @@
 pyTecdocData is a python program that will help you export data from your installed Tecdoc
 
 
+
+
 Make sure to edit the ini file !
+
+
 
 please set up your DSN in Windows -> Control Panel -> ODBC
 
